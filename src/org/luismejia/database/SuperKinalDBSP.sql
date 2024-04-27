@@ -99,7 +99,7 @@ DELIMITER ;
 
 -- Buscar Cargo
 DELIMITER $$
-CREATE PROCEDURE sp_buscarCargoPorID(cargoId INT)
+CREATE PROCEDURE sp_buscarCargo(cargoId INT)
 BEGIN
     SELECT * FROM Cargo WHERE cargoId = cargoId;
 END$$
@@ -145,7 +145,7 @@ DELIMITER ;
 
 -- Buscar Compra
 DELIMITER $$
-CREATE PROCEDURE sp_buscarCompraPorID(compraId INT)
+CREATE PROCEDURE sp_buscarCompra(compraId INT)
 BEGIN
     SELECT * FROM Compras WHERE compraId = compraId;
 END$$
@@ -153,7 +153,7 @@ DELIMITER ;
 
  -- //////////////////////////////////////////////////////////////////////Procedimientos para Categoria Productos///////////////////////////////////////////////////////
  
--- Procedimiento Almacenado para Agregar Categoría de Producto
+-- Agregar Categoría de Producto
 DELIMITER $$
 CREATE PROCEDURE sp_agregarCategoriaProducto(nom VARCHAR(30), descCateg VARCHAR(100))
 BEGIN
@@ -162,7 +162,7 @@ BEGIN
 END$$
 DELIMITER ;
 
--- Procedimiento Almacenado para Listar Categorías de Producto
+-- Listar Categorías de Producto
 DELIMITER $$
 CREATE PROCEDURE sp_listarCategoriasProductos()
 BEGIN
@@ -170,7 +170,7 @@ BEGIN
 END$$
 DELIMITER ;
 
--- Procedimiento Almacenado para Eliminar Categoría de Producto
+-- Eliminar Categoría de Producto
 DELIMITER $$
 CREATE PROCEDURE sp_eliminarCategoriaProducto(categoriaProductosId INT)
 BEGIN
@@ -178,9 +178,9 @@ BEGIN
 END$$
 DELIMITER ;
 
--- Procedimiento Almacenado para Actualizar Categoría de Producto
+--  Editar Categoría de Producto
 DELIMITER $$
-CREATE PROCEDURE sp_actualizarCategoriaProducto(categoriaProductosId INT, nom VARCHAR(30), descCateg VARCHAR(100))
+CREATE PROCEDURE sp_editarCategoriaProducto(categoriaProductosId INT, nom VARCHAR(30), descCateg VARCHAR(100))
 BEGIN
     UPDATE CategoriaProductos
     SET nombreCategoria = nom, descripcionCategoria = descCateg
@@ -188,19 +188,11 @@ BEGIN
 END$$
 DELIMITER ;
 
--- Procedimiento Almacenado para Buscar Categoría de Producto por ID
+-- Buscar Categoría de Producto
 DELIMITER $$
-CREATE PROCEDURE sp_buscarCategoriaProductoPorID(categoriaProductosId INT)
+CREATE PROCEDURE sp_buscarCategoriaProducto(categoriaProductosId INT)
 BEGIN
     SELECT * FROM CategoriaProductos WHERE categoriaProductosId = categoriaProductosId;
-END$$
-DELIMITER ;
-
--- Procedimiento Almacenado para Buscar Categoría de Producto por Nombre
-DELIMITER $$
-CREATE PROCEDURE sp_buscarCategoriaProductoPorNombre(nom VARCHAR(30))
-BEGIN
-    SELECT * FROM CategoriaProductos WHERE nombreCategoria = nom;
 END$$
 DELIMITER ;
 
@@ -245,7 +237,7 @@ DELIMITER ;
 
 -- Buscar Distribuidor 
 DELIMITER $$
-CREATE PROCEDURE sp_buscarDistribuidorPorID(distribuidorId INT)
+CREATE PROCEDURE sp_buscarDistribuidor(distribuidorId INT)
 BEGIN
     SELECT * FROM Distribuidores WHERE distribuidorId = distribuidorId;
 END$$
@@ -291,7 +283,7 @@ DELIMITER ;
 
 -- Buscar Producto
 DELIMITER $$
-CREATE PROCEDURE sp_buscarProductoPorID(productosId INT)
+CREATE PROCEDURE sp_buscarProducto(productosId INT)
 BEGIN
     SELECT * FROM Productos WHERE productosId = productosId;
 END$$
@@ -336,7 +328,7 @@ DELIMITER ;
 
 -- Buscar Promoción
 DELIMITER $$
-CREATE PROCEDURE sp_buscarPromocionPorID(promocionesId INT)
+CREATE PROCEDURE sp_buscarPromocion(promocionesId INT)
 BEGIN
     SELECT * FROM Promociones WHERE promocionesId = promocionesId;
 END$$
@@ -381,7 +373,7 @@ DELIMITER ;
 
 -- Buscar Empleado
 DELIMITER $$
-CREATE PROCEDURE sp_buscarEmpleadoPorID(empleadoId INT)
+CREATE PROCEDURE sp_buscarEmpleado(empleadoId INT)
 BEGIN
     SELECT * FROM Empleados WHERE empleadoId = empleadoId;
 END$$
@@ -426,7 +418,7 @@ DELIMITER ;
 
 -- Buscar Factura
 DELIMITER $$
-CREATE PROCEDURE sp_buscarFacturaPorID(facturaId INT)
+CREATE PROCEDURE sp_buscarFactura(facturaId INT)
 BEGIN
     SELECT * FROM Facturas WHERE facturaId = facturaId;
 END$$
@@ -471,7 +463,7 @@ DELIMITER ;
 
 -- Buscar Ticket de Soporte
 DELIMITER $$
-CREATE PROCEDURE sp_buscarTicketSoportePorID(ticketSoporteId INT)
+CREATE PROCEDURE sp_buscarTicketSoporte(ticketSoporteId INT)
 BEGIN
     SELECT * FROM TicketSoporte WHERE ticketSoporteId = ticketSoporteId;
 END$$
@@ -514,18 +506,11 @@ BEGIN
 END$$
 DELIMITER ;
 
--- Procedimiento Almacenado para Buscar Detalle de Factura por ID
+-- Buscar Detalle de Factura 
 DELIMITER $$
-CREATE PROCEDURE sp_buscarDetalleFacturaPorID(detalleFacturaId INT)
+CREATE PROCEDURE sp_buscarDetalleFactura(detalleFacturaId INT)
 BEGIN
     SELECT * FROM DetalleFactura WHERE detalleFacturaId = detalleFacturaId;
 END$$
 DELIMITER ;
 
--- Procedimiento Almacenado para Buscar Detalle de Factura por Factura
-DELIMITER $$
-CREATE PROCEDURE sp_buscarDetallesFacturaPorFactura(factId INT)
-BEGIN
-    SELECT * FROM DetalleFactura WHERE facturaId = factId;
-END$$
-DELIMITER ;
