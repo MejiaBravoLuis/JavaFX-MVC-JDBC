@@ -90,19 +90,20 @@ create table Facturas(
         hora time not null,
         clienteId int not null,
         empleadoId int not null,
-        total decimal(10,2),
-        constraint FK_ClienteId_Facturas foreign key Facturas(clienteId) references Clientes(clienteId),
-        constraint FK_EmpleadoId_Facturas foreign key Facturas(empleadoId) references Empleados(empleadoId)
+        total decimal(10,2), 
+			constraint FK_clienteId_Facturas foreign key (clienteId) 
+				references Clientes(clienteId),
+		constraint FK_empleadoId_Facturas foreign key (empleadoId) references Empleados(empleadoId)
 );
 
 create table TicketSoporte(
-		ticketSoporteId int(11) not null auto_increment primary key,
-        descripcionTicket varchar(250),
-        estatus varchar(30),
-        clienteId int not null,
-        facturaId int not null,
-        constraint FK_ClienteId_TicketSoporte foreign key TicketSoporte(clienteId) references Clientes(clienteId),
-        constraint FK_FacturaId_TicketSoporte foreign key TicketSoporte(facturaId) references Facturas(facturaId)
+    ticketSoporteId int not null auto_increment,
+    descripcionTicket varchar(250) not null,
+    estatus Varchar(30) not null,
+    clienteId int not null,
+    facturaId int,
+    primary key (ticketSoporteId), constraint FK_clienteId_TicketSoporte foreign key (clienteId) references Clientes(clienteId),
+    constraint FK_facturaId_TicketSoporte foreign key (facturaId) references Facturas(facturaId)
 );
 
 create table DetalleFactura(
@@ -122,3 +123,8 @@ INSERT INTO Clientes ( nombre, apellido, telefono, direccion,nit) values
 
     SELECT * FROM Clientes;
  
+INSERT INTO Cargo( nombreCargo, descripcionCargo)VALUES
+('Desarrollador', 'Servicio tecnico');
+SELECT * FROM Cargo;
+SELECT * from Empleados;
+select * from facturas;

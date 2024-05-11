@@ -19,12 +19,20 @@ import javafx.scene.control.MenuItem;
 public class MenuPrincipalController implements Initializable{
     private Main stage;
     @FXML
-    MenuItem btnClientes;
+    MenuItem btnClientes, btnTicketSoporte, btnCargos, btnCategoria, btnDistribuidores;
     
     @FXML
     public void handleButtonAction(ActionEvent event)throws Exception{
         if(event.getSource() == btnClientes){
             stage.menuClienteView();
+        }else if(event.getSource() == btnTicketSoporte){
+            stage.menuTicketSoporteView();
+        }else if(event.getSource() == btnCargos){
+            stage.menuCargoView();
+        }else if(event.getSource() == btnCategoria){
+            stage.menuCategoriaProductoView();
+        }else if(event.getSource() == btnDistribuidores){
+            stage.menuDistribuidorView();
         }
     }
     

@@ -1,18 +1,18 @@
 use SuperKinalDB;
-
 -- //////////////////////////////////////////////////////////////////////Procedimientos para Clientes///////////////////////////////////////////////////////
  
 -- Agregar
  
 DELIMITER $$
-create procedure sp_agregarCliente(nom varchar(30), ape varchar(30), tel varchar (15), dir varchar(200),ni varchar(15))
+create procedure sp_agregarClientes(nom varchar(30), ape varchar(30), tel varchar (15), dir varchar(200),ni varchar(15))
 BEGIN
 	insert into Clientes(nombre, apellido, telefono, direccion,nit) values
 		(nom, ape, tel,dir,ni);
 END$$
 DELIMITER ;
  
-call sp_agregarCliente('Diego', 'Neburi', '8200-6040', 'GTM','7954264-0');
+call sp_agregarClientes('Diego', 'Neburi', '8200-6040', 'GTM','7954264-0');
+
  
 -- Listar
  
@@ -22,6 +22,7 @@ BEGIN
 	SELECT * FROM Clientes;
 END $$
 DELIMITER ;
+call sp_listarClientes();
 
 -- Eliminar
  
@@ -57,11 +58,70 @@ CREATE PROCEDURE sp_BuscarCliente(IN clidId INT)
 DELIMITER ;
  
 CALL sp_BuscarCliente(1);
+
+
+-- //////////////////////////////////////////////////////////////////////Procedimientos para Empleados///////////////////////////////////////////////////////
+
+-- Agregar Empleado
+DELIMITER $$
+CREATE PROCEDURE sp_agregarEmpleado(nom VARCHAR(30), ape VARCHAR(30), sueldo DECIMAL(10,2), horaDeEntrada TIME, horaDeSalida TIME, cargoId INT, encargadoId INT)
+BEGIN
+    INSERT INTO Empleados(nombreEmpleado, apellidoEmpleado, sueldo, horaDeEntrada, horaDeSalida, cargoId, encargadoId)
+    VALUES (nom, ape, sueldo, horaDeEntrada, horaDeSalida, cargoId, encargadoId);
+END$$
+DELIMITER ;
+CALL sp_agregarEmpleado('Juan', 'Pérez', 2000.00, '08:00:00', '17:00:00', 1, 1 );
+
+-- Listar Empleados
+DELIMITER $$
+CREATE PROCEDURE sp_listarEmpleados()
+BEGIN
+    SELECT * FROM Empleados;
+END$$
+DELIMITER ;
+CALL sp_ListarEmpleados();
+
+-- Eliminar Empleado
+DELIMITER $$
+CREATE PROCEDURE sp_eliminarEmpleado(empleadoId INT)
+BEGIN
+    DELETE FROM Empleados WHERE empleadoId = empleadoId;
+END$$
+DELIMITER ;
+
+--  Editar Empleado
+DELIMITER $$
+CREATE PROCEDURE sp_editarEmpleado(empleadoId INT, nom VARCHAR(30), ape VARCHAR(30), suel DECIMAL(10,2), hEntr TIME, hSal TIME, carId INT, encId INT)
+BEGIN
+    UPDATE Empleados
+    SET nombreEmpleado = nom, apellidoEmpleado = ape, sueldo = suel, horaDeEntrada = hEntr, horaDeSalida = hSal, cargoId = carId, encargadoId = encId
+    WHERE empleadoId = empleadoId;
+END$$
+DELIMITER ;
+
+-- Buscar Empleado
+DELIMITER $$
+CREATE PROCEDURE sp_buscarEmpleado(empleadoId INT)
+BEGIN
+    SELECT * FROM Empleados WHERE empleadoId = empleadoId;
+END$$
+DELIMITER ;
+
+-- ENCARGADO EMPLEADOS
+Delimiter $$
+create procedure sp_asignarEncargado(In empId Int, In encarId int)
+begin
+
+	Update Empleados  
+		Set 
+			Empleados.encargadoId = encarId
+			Where empleadoId = empId;
+end$$
+Delimiter ;
+call sp_asignarEncargado(1,1);
  
  -- //////////////////////////////////////////////////////////////////////Procedimientos Cargos///////////////////////////////////////////////////////
-
--- Agregar cargos 
-
+ 
 -- Agregar Cargo
 DELIMITER $$
 CREATE PROCEDURE sp_agregarCargo(nom VARCHAR(30), des VARCHAR(100))
@@ -70,40 +130,46 @@ BEGIN
     VALUES(nom, des);
 END$$
 DELIMITER ;
+CALL sp_agregarCargo('Gerente', 'lider de sede' );
 
 -- Listar Cargos
 DELIMITER $$
-CREATE PROCEDURE sp_listarCargos()
+CREATE PROCEDURE sp_listarCargo()
 BEGIN
     SELECT * FROM Cargo;
 END$$
 DELIMITER ;
+call sp_listarCargo;
 
 -- Eliminar Cargo
 DELIMITER $$
-CREATE PROCEDURE sp_eliminarCargo(cargoId INT)
+CREATE PROCEDURE sp_eliminarCargo(in carId INT)
 BEGIN
-    DELETE FROM Cargo WHERE cargoId = cargoId;
+    DELETE FROM Cargo WHERE cargoId = carId;
 END$$
 DELIMITER ;
+call sp_eliminarCargo(2);
+
 
 -- editar Cargo
 DELIMITER $$
-CREATE PROCEDURE sp_editarrCargo(cargoId INT, nom VARCHAR(30), des VARCHAR(100))
+CREATE PROCEDURE sp_editarCargo(carId INT, nom VARCHAR(30), des VARCHAR(100))
 BEGIN
     UPDATE Cargo
     SET nombreCargo = nom, descripcionCargo = des
-    WHERE cargoId = cargoId;
+    WHERE cargoId = carId;
 END$$
 DELIMITER ;
+call sp_editarCargo(1, 'Programador', 'Programa');
 
 -- Buscar Cargo
 DELIMITER $$
-CREATE PROCEDURE sp_buscarCargoPorID(cargoId INT)
+CREATE PROCEDURE sp_buscarCargo(carId INT)
 BEGIN
-    SELECT * FROM Cargo WHERE cargoId = cargoId;
+    SELECT * FROM Cargo WHERE cargoId = carId;
 END$$
 DELIMITER ;
+call sp_buscarCargo(2);
 
 
  -- //////////////////////////////////////////////////////////////////////Procedimientos para Compras///////////////////////////////////////////////////////
@@ -145,7 +211,7 @@ DELIMITER ;
 
 -- Buscar Compra
 DELIMITER $$
-CREATE PROCEDURE sp_buscarCompraPorID(compraId INT)
+CREATE PROCEDURE sp_buscarCompra(compraId INT)
 BEGIN
     SELECT * FROM Compras WHERE compraId = compraId;
 END$$
@@ -153,57 +219,55 @@ DELIMITER ;
 
  -- //////////////////////////////////////////////////////////////////////Procedimientos para Categoria Productos///////////////////////////////////////////////////////
  
--- Procedimiento Almacenado para Agregar Categoría de Producto
+-- Agregar Categoría de Producto
 DELIMITER $$
-CREATE PROCEDURE sp_agregarCategoriaProducto(nom VARCHAR(30), descCateg VARCHAR(100))
+CREATE PROCEDURE sp_agregarCategoriasProducto(nom VARCHAR(30), descCateg VARCHAR(100))
 BEGIN
     INSERT INTO CategoriaProductos(nombreCategoria, descripcionCategoria)
     VALUES(nom, descCateg);
 END$$
 DELIMITER ;
+call sp_agregarCategoriasProducto('Limpieza e higiene','cepillo de dientes');
 
--- Procedimiento Almacenado para Listar Categorías de Producto
+
+-- Listar Categorías de Producto
 DELIMITER $$
 CREATE PROCEDURE sp_listarCategoriasProductos()
 BEGIN
     SELECT * FROM CategoriaProductos;
 END$$
 DELIMITER ;
+call sp_listarCategoriasProductos();
 
--- Procedimiento Almacenado para Eliminar Categoría de Producto
+-- Eliminar Categoría de Producto
 DELIMITER $$
-CREATE PROCEDURE sp_eliminarCategoriaProducto(categoriaProductosId INT)
+CREATE PROCEDURE sp_eliminarCategoriaProducto(IN categoriaPId INT)
 BEGIN
-    DELETE FROM CategoriaProductos WHERE categoriaProductosId = categoriaProductosId;
+    DELETE FROM CategoriaProductos 
+    WHERE categoriaProductosId = categoriaPId;
 END$$
 DELIMITER ;
+call sp_eliminarCategoriaProducto(2);
 
--- Procedimiento Almacenado para Actualizar Categoría de Producto
+--  Editar Categoría de Producto
 DELIMITER $$
-CREATE PROCEDURE sp_actualizarCategoriaProducto(categoriaProductosId INT, nom VARCHAR(30), descCateg VARCHAR(100))
+CREATE PROCEDURE sp_editarCategoriaProducto(IN categoriaPId INT, nom VARCHAR(30), descCateg VARCHAR(100))
 BEGIN
     UPDATE CategoriaProductos
     SET nombreCategoria = nom, descripcionCategoria = descCateg
-    WHERE categoriaProductosId = categoriaProductosId;
+    WHERE categoriaProductosId = categoriaPId;
 END$$
 DELIMITER ;
+call sp_editarCategoriaProducto(1, 'Ropa 1', 'Descripcion 1');
 
--- Procedimiento Almacenado para Buscar Categoría de Producto por ID
+-- Buscar Categoría de Producto
 DELIMITER $$
-CREATE PROCEDURE sp_buscarCategoriaProductoPorID(categoriaProductosId INT)
+CREATE PROCEDURE sp_buscarCategoriaProducto(categoriaPId INT)
 BEGIN
-    SELECT * FROM CategoriaProductos WHERE categoriaProductosId = categoriaProductosId;
+    SELECT * FROM CategoriaProductos WHERE categoriaProductosId = categoriaPId;
 END$$
 DELIMITER ;
-
--- Procedimiento Almacenado para Buscar Categoría de Producto por Nombre
-DELIMITER $$
-CREATE PROCEDURE sp_buscarCategoriaProductoPorNombre(nom VARCHAR(30))
-BEGIN
-    SELECT * FROM CategoriaProductos WHERE nombreCategoria = nom;
-END$$
-DELIMITER ;
-
+call sp_buscarCategoriaProducto(2);
 
  -- //////////////////////////////////////////////////////////////////////Procedimientos para Distribuidores///////////////////////////////////////////////////////
 
@@ -216,6 +280,7 @@ BEGIN
     VALUES(nomDistribuidor, dirDistribuidor, nitDistribuidor, telDistribuidor, webDistribuidor);
 END$$
 DELIMITER ;
+call sp_agregarDistribuidor('No cap','Real facts','4272870','42119921','www.Trueno.2.0.1.9');
 
 -- Listar Distribuidores
 DELIMITER $$
@@ -224,33 +289,36 @@ BEGIN
     SELECT * FROM Distribuidores;
 END$$
 DELIMITER ;
+call sp_listarDistribuidores;
 
 -- Eliminar Distribuidor
 DELIMITER $$
-CREATE PROCEDURE sp_eliminarDistribuidor(distribuidorId INT)
+CREATE PROCEDURE sp_eliminarDistribuidor(distId INT)
 BEGIN
-    DELETE FROM Distribuidores WHERE distribuidorId = distribuidorId;
+    DELETE FROM Distribuidores WHERE distribuidorId = distId;
 END$$
 DELIMITER ;
+call sp_eliminarDistribuidor(2);
 
 -- Editar Distribuidor
 DELIMITER $$
-CREATE PROCEDURE sp_editarDistribuidor(distribuidorId INT, nomDistribuidor VARCHAR(30), dirDistribuidor VARCHAR(200), nitDistribuidor VARCHAR(15), telDistribuidor VARCHAR(15), webDistribuidor VARCHAR(50))
+CREATE PROCEDURE sp_EditarDistribuidor(IN distId INT, IN nomD VARCHAR(30), IN dirD VARCHAR(200), IN niD VARCHAR(15), IN telD VARCHAR(15), IN webD VARCHAR(50))
 BEGIN
     UPDATE Distribuidores
-    SET nombreDistribuidor = nomDistribuidor, direccionDistribuidor = dirDistribuidor, nitDistribuidor = nitDistribuidor, telefonoDistribuidor = telDistribuidor, web = webDistribuidor
-    WHERE distribuidorId = distribuidorId;
+    SET nombreDistribuidor = nomD, direccionDistribuidor = dirD, nitDistribuidor = niD, telefonoDistribuidor = telD, web = webD
+    WHERE distribuidorId = distId;
 END$$
 DELIMITER ;
+call sp_editarDistribuidor(1, 'Rain','Trueno','000000','12344321','MeJodí.tainy.com');
 
 -- Buscar Distribuidor 
 DELIMITER $$
-CREATE PROCEDURE sp_buscarDistribuidorPorID(distribuidorId INT)
+CREATE PROCEDURE sp_buscarDistribuidor(distId INT)
 BEGIN
-    SELECT * FROM Distribuidores WHERE distribuidorId = distribuidorId;
+    SELECT * FROM Distribuidores WHERE distribuidorId = distId;
 END$$
 DELIMITER ;
-
+call sp_buscarDistribuidor(1);
 
  -- //////////////////////////////////////////////////////////////////////Procedimientos para Productos///////////////////////////////////////////////////////
 
@@ -291,7 +359,7 @@ DELIMITER ;
 
 -- Buscar Producto
 DELIMITER $$
-CREATE PROCEDURE sp_buscarProductoPorID(productosId INT)
+CREATE PROCEDURE sp_buscarProducto(productosId INT)
 BEGIN
     SELECT * FROM Productos WHERE productosId = productosId;
 END$$
@@ -336,56 +404,65 @@ DELIMITER ;
 
 -- Buscar Promoción
 DELIMITER $$
-CREATE PROCEDURE sp_buscarPromocionPorID(promocionesId INT)
+CREATE PROCEDURE sp_buscarPromocion(promocionesId INT)
 BEGIN
     SELECT * FROM Promociones WHERE promocionesId = promocionesId;
 END$$
 DELIMITER ;
 
- -- //////////////////////////////////////////////////////////////////////Procedimientos para Empleados///////////////////////////////////////////////////////
 
--- Agregar Empleado
+ -- //////////////////////////////////////////////////////////////////////Procedimientos para TicketSoporte///////////////////////////////////////////////////////
+-- Agregar Ticket de Soporte
 DELIMITER $$
-CREATE PROCEDURE sp_agregarEmpleado(nom VARCHAR(30), ape VARCHAR(30), suel DECIMAL(10,2), hEntr TIME, hSal TIME, carId INT, encId INT)
+CREATE PROCEDURE sp_agregarTicketSoporte(descT VARCHAR(250), cliId INT, factId INT)
 BEGIN
-    INSERT INTO Empleados(nombreEmpleado, apellidoEmpleado, sueldo, horaDeEntrada, horaDeSalida, cargoId, encargadoId)
-    VALUES(nom, ape, suel, hEntr, hSal, carId, encId);
+    INSERT INTO TicketSoporte(descripcionTicket, estatus, clienteId, facturaId)
+    VALUES(descT, 'Recién Creado', cliId, factId);
+END$$
+DELIMITER ;
+call sp_agregarTicketSoporte('Problema ',1, NULL);
+
+-- Listar Tickets de Soporte
+DELIMITER $$
+CREATE PROCEDURE sp_listarTicketSoporte()
+BEGIN
+    select TS.ticketSoporteId, TS.descripcionTicket, TS.estatus,
+	CONCAT("ID:", C.clienteId, " | ",  C.nombre,  " ", C.apellido)AS Cliente, TS.facturaId from TicketSoporte TS
+	join Clientes C on TS.clienteId = C.clienteId;
+    
+END$$
+DELIMITER ;
+call sp_listarTicketSoporte();
+
+-- Eliminar Ticket de Soporte
+DELIMITER $$
+CREATE PROCEDURE sp_eliminarTicketSoporte(ticketSId INT)
+BEGIN
+    DELETE FROM TicketSoporte WHERE ticketSoporteId = ticketSId;
+END$$
+DELIMITER ;
+call sp_eliminarTicketSoporte(2);
+
+-- Editar Ticket de Soporte
+DELIMITER $$
+CREATE PROCEDURE sp_actualizarTicketSoporte(ticketId INT, descT VARCHAR(250), est VARCHAR(30), cliId INT, factId INT)
+BEGIN
+    UPDATE TicketSoporte
+    SET descripcionTicket = descT, estatus = est, clienteId = cliId, facturaId = factId
+    WHERE ticketSoporteId = ticketId;
 END$$
 DELIMITER ;
 
--- Listar Empleados
-DELIMITER $$
-CREATE PROCEDURE sp_listarEmpleados()
-BEGIN
-    SELECT * FROM Empleados;
-END$$
-DELIMITER ;
+call sp_actualizarTicketSoporte(1 ,'Problema resuelto', 'Resuelto', 2, NULL);
 
--- Eliminar Empleado
+-- Buscar Ticket de Soporte
 DELIMITER $$
-CREATE PROCEDURE sp_eliminarEmpleado(empleadoId INT)
+CREATE PROCEDURE sp_buscarTicketSoporte(ticketSId INT)
 BEGIN
-    DELETE FROM Empleados WHERE empleadoId = empleadoId;
+    SELECT * FROM TicketSoporte WHERE ticketSoporteId = ticketSId;
 END$$
 DELIMITER ;
-
---  Editar Empleado
-DELIMITER $$
-CREATE PROCEDURE sp_editarEmpleado(empleadoId INT, nom VARCHAR(30), ape VARCHAR(30), suel DECIMAL(10,2), hEntr TIME, hSal TIME, carId INT, encId INT)
-BEGIN
-    UPDATE Empleados
-    SET nombreEmpleado = nom, apellidoEmpleado = ape, sueldo = suel, horaDeEntrada = hEntr, horaDeSalida = hSal, cargoId = carId, encargadoId = encId
-    WHERE empleadoId = empleadoId;
-END$$
-DELIMITER ;
-
--- Buscar Empleado
-DELIMITER $$
-CREATE PROCEDURE sp_buscarEmpleadoPorID(empleadoId INT)
-BEGIN
-    SELECT * FROM Empleados WHERE empleadoId = empleadoId;
-END$$
-DELIMITER ;
+call sp_buscarTicketSoporte(1);
 
  -- //////////////////////////////////////////////////////////////////////Procedimientos para Facturas///////////////////////////////////////////////////////
 
@@ -397,6 +474,8 @@ BEGIN
     VALUES(fec, hor, cliId, empId, tot);
 END$$
 DELIMITER ;
+call sp_agregarFactura ('2024-05-07', '12:00', 1, 1, '12.00');
+
 
 -- Listar Facturas
 DELIMITER $$
@@ -405,6 +484,7 @@ BEGIN
     SELECT * FROM Facturas;
 END$$
 DELIMITER ;
+call sp_listarFacturas();
 
 -- Eliminar Factura
 DELIMITER $$
@@ -426,57 +506,11 @@ DELIMITER ;
 
 -- Buscar Factura
 DELIMITER $$
-CREATE PROCEDURE sp_buscarFacturaPorID(facturaId INT)
+CREATE PROCEDURE sp_buscarFactura(facturaId INT)
 BEGIN
     SELECT * FROM Facturas WHERE facturaId = facturaId;
 END$$
 DELIMITER ;
-
- -- //////////////////////////////////////////////////////////////////////Procedimientos para TicketSoporte///////////////////////////////////////////////////////
-
--- Agregar Ticket de Soporte
-DELIMITER $$
-CREATE PROCEDURE sp_agregarTicketSoporte(descT VARCHAR(250), est VARCHAR(30), cliId INT, factId INT)
-BEGIN
-    INSERT INTO TicketSoporte(descripcionTicket, estatus, clienteId, facturaId)
-    VALUES(descT, est, cliId, factId);
-END$$
-DELIMITER ;
-
--- Listar Tickets de Soporte
-DELIMITER $$
-CREATE PROCEDURE sp_listarTicketsSoporte()
-BEGIN
-    SELECT * FROM TicketSoporte;
-END$$
-DELIMITER ;
-
--- Eliminar Ticket de Soporte
-DELIMITER $$
-CREATE PROCEDURE sp_eliminarTicketSoporte(ticketSoporteId INT)
-BEGIN
-    DELETE FROM TicketSoporte WHERE ticketSoporteId = ticketSoporteId;
-END$$
-DELIMITER ;
-
--- Editar Ticket de Soporte
-DELIMITER $$
-CREATE PROCEDURE sp_actualizarTicketSoporte(ticketSoporteId INT, descT VARCHAR(250), est VARCHAR(30), cliId INT, factId INT)
-BEGIN
-    UPDATE TicketSoporte
-    SET descripcionTicket = descT, estatus = est, clienteId = cliId, facturaId = factId
-    WHERE ticketSoporteId = ticketSoporteId;
-END$$
-DELIMITER ;
-
--- Buscar Ticket de Soporte
-DELIMITER $$
-CREATE PROCEDURE sp_buscarTicketSoportePorID(ticketSoporteId INT)
-BEGIN
-    SELECT * FROM TicketSoporte WHERE ticketSoporteId = ticketSoporteId;
-END$$
-DELIMITER ;
-
  -- //////////////////////////////////////////////////////////////////////Procedimientos para DetalleFactura///////////////////////////////////////////////////////
 
 -- Agregar Detalle de Factura
@@ -514,18 +548,10 @@ BEGIN
 END$$
 DELIMITER ;
 
--- Procedimiento Almacenado para Buscar Detalle de Factura por ID
+-- Buscar Detalle de Factura 
 DELIMITER $$
-CREATE PROCEDURE sp_buscarDetalleFacturaPorID(detalleFacturaId INT)
+CREATE PROCEDURE sp_buscarDetalleFactura(detalleFacturaId INT)
 BEGIN
     SELECT * FROM DetalleFactura WHERE detalleFacturaId = detalleFacturaId;
-END$$
-DELIMITER ;
-
--- Procedimiento Almacenado para Buscar Detalle de Factura por Factura
-DELIMITER $$
-CREATE PROCEDURE sp_buscarDetallesFacturaPorFactura(factId INT)
-BEGIN
-    SELECT * FROM DetalleFactura WHERE facturaId = factId;
 END$$
 DELIMITER ;

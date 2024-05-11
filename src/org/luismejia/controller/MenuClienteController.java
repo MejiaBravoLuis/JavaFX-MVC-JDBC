@@ -18,6 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -26,6 +27,7 @@ import org.luismejia.dao.Conexion;
 import org.luismejia.model.Cliente;
 import org.luismejia.dto.ClienteDTO;
 import org.luismejia.system.Main;
+import org.luismejia.utils.SuperKinalAlert;
 
 /**
 * FXML Controller class
@@ -59,10 +61,12 @@ public class MenuClienteController implements Initializable {
             stage.formClientesView(1);
         }else if(event.getSource() == btnEditar){
             ClienteDTO.getClienteDTO().setCliente((Cliente)tblCliente.getSelectionModel().getSelectedItem());
-            stage.formClientesView(2);
+            stage.formClientesView(2);      
         }else if(event.getSource() == btnEliminar){
-            eliminarCliente(((Cliente)tblCliente.getSelectionModel().getSelectedItem()).getClienteId());
-            cargaDatos();
+            if(SuperKinalAlert.getInstance().mostrarAlertaConfirmacion(404).get() == ButtonType.OK){
+                eliminarCliente(((Cliente)tblCliente.getSelectionModel().getSelectedItem()).getClienteId());
+                cargaDatos();
+            }
         }else if (event.getSource() == btnBuscar){
             tblCliente.getItems().clear();
             if(tfClienteId.getText().equals("")){
@@ -77,9 +81,6 @@ public class MenuClienteController implements Initializable {
     
     }
     
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cargaDatos();
@@ -148,7 +149,7 @@ public class MenuClienteController implements Initializable {
         return FXCollections.observableList(clientes);
     }
     
-     public void eliminarCliente(int cliId){
+    public void eliminarCliente(int cliId){
         try{
             conexion = Conexion.getInstance().obtenerConexion();
             String sql = "call sp_EliminarCliente(?)";
@@ -217,8 +218,6 @@ public class MenuClienteController implements Initializable {
         }
         return cliente;
     }
-
-
 
     public Main getStage() {
         return stage;

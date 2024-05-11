@@ -15,11 +15,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import org.luismejia.dao.Conexion;
 import org.luismejia.dto.ClienteDTO;
 import org.luismejia.model.Cliente;
 import org.luismejia.system.Main;
+import org.luismejia.utils.SuperKinalAlert;
 
 /**
  * FXML Controller class
@@ -38,19 +40,38 @@ public class FormClienteController implements Initializable {
     @FXML
     Button btnGuardar, btnCancelar;
     @FXML
+    
     public void handleButtonAction(ActionEvent event){
         if(event.getSource() == btnCancelar){
             ClienteDTO.getClienteDTO().setCliente(null);
             stage.menuClienteView();
         }else if(event.getSource() == btnGuardar){
                 if (op == 1) {
-                    agregarCliente ();
-                    stage.menuClienteView ();
-                    }else if (op == 2) {
-                        editarCliente();
-                        ClienteDTO.getClienteDTO().setCliente(null);
+                    if(!tfNombre.getText().equals("") && !tfApellido.getText().equals("") && !tfDireccion.getText().equals("")){
+                        agregarCliente();
+                        SuperKinalAlert.getInstance().mostrarAlertasInformacion(400);
                         stage.menuClienteView();
+                    }else {
+                        SuperKinalAlert.getInstance().mostrarAlertasInformacion(600);
+                        tfNombre.requestFocus();//Enfocar un textfield de forma dinámica
+                    }
+                    
+                }else if (op == 2) {
+                    if(!tfNombre.getText().equals("") && !tfApellido.getText().equals("") && !tfDireccion.getText().equals("")){
+                        if(SuperKinalAlert.getInstance().mostrarAlertaConfirmacion(505).get() == ButtonType.OK){
+                            editarCliente();
+                            ClienteDTO.getClienteDTO().setCliente(null);
+                            SuperKinalAlert.getInstance().mostrarAlertasInformacion(500);
+                            stage.menuClienteView();
+                        }else{
+                            stage.menuClienteView();    
+                        }
+                    }
+                    else{
+                        SuperKinalAlert.getInstance().mostrarAlertasInformacion(600);
+                        tfNombre.requestFocus();
                 }
+            }
         }
     }
     
@@ -76,15 +97,17 @@ public class FormClienteController implements Initializable {
   public void agregarCliente(){
       try{
           conexion = Conexion.getInstance().obtenerConexion();
-          String sql = "call sp_agregarCliente(?, ?, ?, ?, ?)";
+          String sql = "call sp_agregarClientes(?, ?, ?, ?, ?)";
           statement = conexion.prepareStatement(sql);
           statement.setString(1, tfNombre.getText());
           statement.setString(2, tfApellido.getText());
           statement.setString(3, tfTelefono.getText());
           statement.setString(4, tfDireccion.getText());
           statement.setString(5, tfNit.getText());
-          statement.execute();}catch(SQLException e){
-          System.out.println(e.getMessage());}finally{
+          statement.execute();
+      }catch(SQLException e){
+          System.out.println(e.getMessage());
+          }finally{
           try{
               if(statement != null){
                   statement.close();
