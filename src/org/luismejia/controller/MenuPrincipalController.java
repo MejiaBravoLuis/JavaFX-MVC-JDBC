@@ -19,7 +19,7 @@ import javafx.scene.control.MenuItem;
 public class MenuPrincipalController implements Initializable{
     private Main stage;
     @FXML
-    MenuItem btnClientes, btnTicketSoporte, btnCargos, btnCategoria, btnDistribuidores;
+    MenuItem btnClientes, btnTicketSoporte, btnCargos, btnCategoria, btnDistribuidores, btnEmpleados, btnProductos, btnPromociones, btnCompras, btnFacturas;
     
     @FXML
     public void handleButtonAction(ActionEvent event)throws Exception{
@@ -33,6 +33,16 @@ public class MenuPrincipalController implements Initializable{
             stage.menuCategoriaProductoView();
         }else if(event.getSource() == btnDistribuidores){
             stage.menuDistribuidorView();
+        }else if(event.getSource() == btnEmpleados){
+            stage.menuEmpleadosView();
+        }else if(event.getSource() == btnProductos){
+            stage.menuProductosView();
+        }else if(event.getSource() == btnPromociones){
+            stage.menuPromocionesView();
+        }else if(event.getSource() == btnCompras){
+            stage.menuComprasView();
+        }else if(event.getSource() == btnFacturas){
+            stage.menuFacturasView();
         }
     }
     

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.luismejia.controller.FormEmpleadosController">
+   <children>
+      <ImageView fitHeight="750.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/formEmpleados.png" />
+         </image>
+      </ImageView>
+      <GridPane layoutX="118.0" layoutY="661.0" prefHeight="74.0" prefWidth="214.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="47.0" prefWidth="87.0" text="Guardar" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="47.0" prefWidth="90.0" text="Cancelar" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
+      <ComboBox fx:id="cmbCargos" layoutX="51.0" layoutY="620.0" prefHeight="26.0" prefWidth="327.0" />
+      <TextField fx:id="tfEmpleadoId" editable="false" layoutX="51.0" layoutY="147.0" prefHeight="26.0" prefWidth="327.0" />
+      <TextField fx:id="tfNombreEmpleado" layoutX="51.0" layoutY="218.0" prefHeight="26.0" prefWidth="327.0" />
+      <TextField fx:id="tfApellidoEmpleado" layoutX="51.0" layoutY="298.0" prefHeight="26.0" prefWidth="327.0" />
+      <TextField fx:id="tfSueldo" layoutX="51.0" layoutY="375.0" prefHeight="26.0" prefWidth="327.0" />
+      <TextField fx:id="tfHoraDeEntrada" layoutX="51.0" layoutY="447.0" prefHeight="26.0" prefWidth="327.0" />
+      <TextField fx:id="tfHoraDeSalida" layoutX="51.0" layoutY="526.0" prefHeight="26.0" prefWidth="327.0" />
+   </children>
+</AnchorPane>
