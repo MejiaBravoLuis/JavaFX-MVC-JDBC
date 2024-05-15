@@ -47,7 +47,7 @@ public class MenuProductosController implements Initializable {
     TableView tblProductos;
     
     @FXML
-    TableColumn colProductoId, colNombreProducto, 
+    TableColumn colProductosId, colNombreProducto, 
             colDescripcionProducto, colCantidadStock,
             colPrecioVentaUnitario,colPrecioVentaMayor, 
             colPrecioCompra, colImagen, colDistribuidorId, 
@@ -92,7 +92,7 @@ public class MenuProductosController implements Initializable {
         }else{
             tblProductos.setItems(listarProductos()); 
         }
-            colProductoId.setCellValueFactory(new PropertyValueFactory<Producto, Integer>("productosId"));
+            colProductosId.setCellValueFactory(new PropertyValueFactory<Producto, Integer>("productosId"));
             colNombreProducto.setCellValueFactory(new PropertyValueFactory<Producto, String>("nombreProducto"));
             colDescripcionProducto.setCellValueFactory(new PropertyValueFactory<Producto, String>("descripcionProducto"));
             colCantidadStock.setCellValueFactory(new PropertyValueFactory<Producto, Integer>("cantidadStock"));

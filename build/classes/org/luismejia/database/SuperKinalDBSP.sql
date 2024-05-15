@@ -70,7 +70,7 @@ BEGIN
     VALUES (nom, ape, sueldo, horaDeEntrada, horaDeSalida, cargoId);
 END$$
 DELIMITER ;
-CALL sp_agregarEmpleado('Juan', 'Pérez', 2000.00, '08:00:00', '17:00:00', 1 );
+CALL sp_agregarEmpleado('Michael', 'De santa', 3000.00, '07:00:00', '16:00:00', 1 );
 
 -- Listar Empleados
 DELIMITER $$

@@ -199,6 +199,7 @@ public class Main extends Application {
         formAsignarEncargado.setStage(this);
         }catch(Exception e){
             System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
     
@@ -208,6 +209,7 @@ public class Main extends Application {
             menuProductos.setStage(this);
         }catch(Exception e){
             System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
     

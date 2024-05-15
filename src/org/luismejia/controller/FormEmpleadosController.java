@@ -47,7 +47,7 @@ public class FormEmpleadosController implements Initializable {
     @FXML
     TextField tfEmpleadoId, tfNombreEmpleado, tfApellidoEmpleado, tfSueldo, tfHoraDeEntrada, tfHoraDeSalida;
     @FXML 
-    ComboBox cmbCargos, cmbEncargados;
+    ComboBox cmbCargos;
     
     @FXML
     private void handleButtonAction(ActionEvent event){
@@ -116,7 +116,7 @@ public class FormEmpleadosController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL location, ResourceBundle resources) {
         if(EmpleadoDTO.getEmpleadoDTO().getEmpleado() != null){
             cargaDatos(EmpleadoDTO.getEmpleadoDTO().getEmpleado());
         }
