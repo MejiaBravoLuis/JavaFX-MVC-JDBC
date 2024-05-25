@@ -17,18 +17,13 @@
             <Image url="@../image/FormProductos.png" />
          </image>
       </ImageView>
-      <TextField fx:id="tfProductoId" layoutX="65.0" layoutY="121.0" prefHeight="26.0" prefWidth="285.0" />
+      <TextField fx:id="tfProductoId" editable="false" layoutX="65.0" layoutY="121.0" prefHeight="26.0" prefWidth="285.0" />
       <TextField fx:id="tfNombreProducto" layoutX="65.0" layoutY="205.0" prefHeight="26.0" prefWidth="285.0" />
       <TextField fx:id="tfDescripcionProducto" layoutX="65.0" layoutY="297.0" prefHeight="26.0" prefWidth="285.0" />
       <TextField fx:id="tfCantidadStock" layoutX="65.0" layoutY="385.0" prefHeight="26.0" prefWidth="285.0" />
       <TextField fx:id="tfPrecioVentaU" layoutX="65.0" layoutY="469.0" prefHeight="26.0" prefWidth="285.0" />
       <TextField fx:id="tfPrecioVentaM" layoutX="65.0" layoutY="554.0" prefHeight="26.0" prefWidth="285.0" />
       <TextField fx:id="tfPrecioCompra" layoutX="65.0" layoutY="637.0" prefHeight="26.0" prefWidth="285.0" />
-      <ImageView fitHeight="162.0" fitWidth="163.0" layoutX="493.0" layoutY="192.0">
-         <image>
-            <Image url="@../image/DragAndDrop.png" />
-         </image>
-      </ImageView>
       <GridPane layoutX="467.0" layoutY="613.0" prefHeight="74.0" prefWidth="214.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -44,5 +39,11 @@
       </GridPane>
       <ComboBox fx:id="cmbDistribuidores" layoutX="493.0" layoutY="541.0" prefWidth="150.0" />
       <ComboBox fx:id="cmbCategoriasProductos" layoutX="879.0" layoutY="206.0" prefHeight="26.0" prefWidth="264.0" />
+      <ImageView fx:id="Mostrarimg" fitHeight="354.0" fitWidth="400.0" layoutX="743.0" layoutY="344.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="Cargarimg" fitHeight="162.0" fitWidth="163.0" layoutX="493.0" layoutY="192.0" onDragDropped="#handleOnDrop" onDragOver="#handleOnDrag">
+         <image>
+            <Image url="@../image/DragAndDrop.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

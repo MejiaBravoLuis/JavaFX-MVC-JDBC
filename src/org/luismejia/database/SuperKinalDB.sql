@@ -61,6 +61,18 @@ create table Productos(
         constraint FK_CategoriaProductosId_Productos foreign key Productos(categoriaProductosId) references CategoriaProductos (categoriaProductosId)
 );
 
+create table detalleCompra(
+    detalleCompraId int not null auto_increment,
+    cantidadCompra int not null,
+    productosId int not null,
+    compraId int not null,
+    primary key PK_detalleCompraId(detalleCompraId),
+    constraint FK_productoId_detalleCompra foreign key (productosId)
+            references Productos(productosId),
+    constraint FK_compraId_detalleCompra  foreign key (productosId)
+            references Compras(compraId)
+);
+
 create table Promociones (
 		promocionesId int(11) primary key not null auto_increment,
         precioPromocion decimal(10,2) not null,
@@ -125,6 +137,4 @@ INSERT INTO Clientes ( nombre, apellido, telefono, direccion,nit) values
  
 INSERT INTO Cargo( nombreCargo, descripcionCargo)VALUES
 ('Desarrollador', 'Servicio tecnico');
-SELECT * FROM Cargo;
-SELECT * from Empleados;
-select * from facturas;
+

@@ -146,6 +146,7 @@ BEGIN
 END$$
 DELIMITER ;
 CALL sp_agregarCargo('Gerente', 'lider de sede' );
+call sp_agregarCargo('Inspector' , 'Inspector de seguridad');
 
 -- Listar Cargos
 DELIMITER $$
@@ -201,12 +202,12 @@ call sp_agregarCompra();
 
 -- Listar Compras
 DELIMITER $$
-CREATE PROCEDURE sp_listarCompras()
+CREATE PROCEDURE sp_listarCompra()
 BEGIN
     SELECT * FROM Compras;
 END$$
 DELIMITER ;
-call sp_listarCompras();
+call sp_listarCompra();
 
 -- Eliminar Compra
 DELIMITER $$
@@ -236,6 +237,7 @@ BEGIN
 END$$
 DELIMITER ;
 call sp_buscarCompra(1);
+
 
  -- //////////////////////////////////////////////////////////////////////Procedimientos para Categoria Productos///////////////////////////////////////////////////////
  
@@ -278,7 +280,7 @@ BEGIN
     WHERE categoriaProductosId = categoriaPId;
 END$$
 DELIMITER ;
-call sp_editarCategoriaProducto(1, 'Ropa 1', 'Descripcion 1');
+call sp_editarCategoriaProducto(1, 'Albúm ', 'Un disco lleno de palos');
 
 -- Buscar Categoría de Producto
 DELIMITER $$
@@ -288,6 +290,8 @@ BEGIN
 END$$
 DELIMITER ;
 call sp_buscarCategoriaProducto(2);
+
+
 
  -- //////////////////////////////////////////////////////////////////////Procedimientos para Distribuidores///////////////////////////////////////////////////////
 
@@ -350,7 +354,7 @@ BEGIN
     VALUES(nom, descProd, cant, precioUV, precioMV, precioC, img, distId, catId);
 END$$
 DELIMITER ;
-CALL sp_agregarProducto('Producto 1', 'Descripcion 1', 50, 100, 200, 300, NULL, 1, 1);
+CALL sp_agregarProducto('Albúm 1', 'Palo palo palo ', 50, 100, 200, 300, NULL, 1, 1);
 
 --  Listar Productos
 DELIMITER $$
@@ -384,7 +388,7 @@ BEGIN
     WHERE productosId = prodId;
 END$$
 DELIMITER ;
-CALL sp_editarProducto(1, 'Producto 23', 'Descripcion 23', 200, 300, 400, 500, NULL, 1,1 );
+CALL sp_editarProducto(1, 'Fatal Fantassy', 'By Alvarito Diaz', 200, 300, 400, 500, NULL, 1,1 );
 
 -- Buscar Producto
 DELIMITER $$
@@ -400,6 +404,67 @@ BEGIN
 END$$
 DELIMITER ;
 CALL sp_buscarProducto(1);
+
+-- ////////////////////////////////////////////////////////////////////// Procedimientos para DetalleCompra ///////////////////////////////////////////////////////
+
+DELIMITER $$
+CREATE PROCEDURE sp_agregarDetalleCompra(cantComp INT, prodIdComp INT, compId INT)
+BEGIN
+    INSERT INTO detalleCompra(cantidadCompra, productosId, compraId)
+    VALUES (cantComp, prodIdComp, compId);
+END$$
+DELIMITER ;
+
+
+CALL sp_agregarDetalleCompra(50, 1, 1);
+
+DELIMITER $$
+CREATE PROCEDURE sp_listarDetalleCompra()
+BEGIN
+    SELECT *
+	FROM detalleCompra;
+END$$
+DELIMITER ;
+
+CALL sp_listarDetalleCompra();
+
+
+DELIMITER $$
+CREATE PROCEDURE sp_eliminarDetalleCompra(IN detCompId INT)
+BEGIN
+    DELETE FROM detalleCompra 
+    WHERE detalleCompraId = detCompId;
+END$$
+DELIMITER ;
+
+CALL sp_eliminarDetalleCompra(1);
+
+
+DELIMITER $$
+CREATE PROCEDURE sp_buscarDetalleCompra(IN detCompId INT)
+BEGIN
+    SELECT detalleCompraId, 
+		cantidadCompra, 
+		productosId, 
+		compraId
+	FROM detalleCompra 
+	WHERE detalleCompraId = detCompId;
+END$$
+DELIMITER ;
+
+CALL sp_buscarDetalleCompra(2);
+
+
+DELIMITER $$
+CREATE PROCEDURE sp_actualizarDetalleCompra(IN detCompId INT, IN cantComp INT, IN prodIdComp INT, IN compId INT)
+BEGIN
+    UPDATE detalleCompra
+    SET cantidadCompra = cantComp, productosId = prodIdComp, compraId = compId
+    WHERE detalleCompraId = detCompId;
+END$$
+DELIMITER ;
+
+CALL sp_actualizarDetalleCompra(1, 10, 1, 1);
 
  -- //////////////////////////////////////////////////////////////////////Procedimientos para Promociones///////////////////////////////////////////////////////
 

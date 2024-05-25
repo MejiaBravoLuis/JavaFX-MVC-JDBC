@@ -24,8 +24,10 @@ import org.luismejia.controller.FormDetalleFacturasController;
 import org.luismejia.controller.FormDistribuidoresController;
 import org.luismejia.controller.FormEmpleadosController;
 import org.luismejia.controller.FormFacturasController;
+import org.luismejia.controller.FormInicioController;
 import org.luismejia.controller.FormProductosController;
 import org.luismejia.controller.FormPromocionesController;
+import org.luismejia.controller.FormRegistroController;
 import org.luismejia.controller.MenuCargoController;
 import org.luismejia.controller.MenuCategoriaProductosController;
 import org.luismejia.controller.MenuClienteController;
@@ -51,8 +53,8 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         this.stage = stage;
-        stage.setTitle("Super Kinal APP");
-        menuPrincipalView();
+        stage.setTitle("Super Kinal APP -------- 2020266");
+        formInicioView();
         stage.show();
     }
     
@@ -73,6 +75,26 @@ public class Main extends Application {
         return resultado;
     }
     
+    public void formInicioView(){
+        try{
+            FormInicioController formInicioView = (FormInicioController)switchScene("FormInicioView.fxml", 500, 750);
+            formInicioView.setStage(this);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    public void formRegistroView(){
+        try{
+            FormRegistroController formRegistroView = (FormRegistroController) switchScene("FormRegistroView.fxml", 500, 750);
+            formRegistroView.setStage(this);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     
     public void menuPrincipalView (){
         try{
@@ -195,7 +217,7 @@ public class Main extends Application {
     
     public void formAsignarEncargadoView(){
         try{
-        FormAsignarEncargadoController formAsignarEncargado = (FormAsignarEncargadoController)switchScene("FormAsignarEncargadoView", 500, 750);
+        FormAsignarEncargadoController formAsignarEncargado = (FormAsignarEncargadoController)switchScene("FormAsignarEncargadoView.fxml", 500, 750);
         formAsignarEncargado.setStage(this);
         }catch(Exception e){
             System.out.println(e.getMessage());

@@ -131,7 +131,7 @@ public class MenuComprasController implements Initializable {
         
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_listarCompras()";
+            String sql = "call sp_listarCompra()";
             statement = conexion.prepareStatement(sql);
             resultSet = statement.executeQuery();
             

@@ -7,9 +7,11 @@ package org.luismejia.controller;
 
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -26,6 +28,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.luismejia.dao.Conexion;
 import org.luismejia.model.Cliente;
+import org.luismejia.model.Facturas;
 import org.luismejia.model.TicketSoporte;
 import org.luismejia.system.Main;
 
@@ -75,9 +78,53 @@ public class MenuTicketSoporteController implements Initializable{
         //TODO
         cargarDatos();
         cargarCmbEstatus();
-        cargarCmbFactura();
+        //cargarCmbFactura();
         cmbCliente.setItems(listarCliente());
+        cmbFactura.setItems(listarFacturas());
         
+    }
+    
+    public ObservableList<Facturas> listarFacturas(){
+        ArrayList<Facturas> facturas = new ArrayList<>();
+        
+        try{
+            conexion = Conexion.getInstance().obtenerConexion();
+            String sql = "call sp_listarFacturas()";
+            statement = conexion.prepareStatement(sql);
+            resultSet = statement.executeQuery();
+            
+            while(resultSet.next()){
+                int facturaId = resultSet.getInt("facturaId");
+                Date fecha = resultSet.getDate("fecha");
+                Time hora = resultSet.getTime("hora");
+                String cliente = resultSet.getString("cliente");
+                String empleado = resultSet.getString("empleado");
+                Double total = resultSet.getDouble("total");
+            
+                facturas.add(new Facturas(facturaId, fecha, hora, cliente, empleado, total));
+            }
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }finally{
+            try{
+                if(resultSet != null){
+                    resultSet.close();
+                }
+                
+                if(statement != null){
+                    statement.close();
+                }
+                
+                if(conexion != null){
+                    conexion.close();
+                }
+            }catch(SQLException e){
+                System.out.println(e.getMessage());
+            }
+        }
+        
+        
+        return FXCollections.observableList(facturas);
     }
     
     public void cargarDatos () {
@@ -95,10 +142,7 @@ public class MenuTicketSoporteController implements Initializable{
         
     }
     
-    public void cargarCmbFactura(){
-        cmbFactura.getItems().add("1");
-    }
-    
+
     public void vaciarForm(){
         tfTicketId.clear();
         taDescripcion.clear();
@@ -226,7 +270,7 @@ public class MenuTicketSoporteController implements Initializable{
             statement = conexion.prepareStatement(sql);
             statement.setString(1, taDescripcion.getText());
             statement.setInt(2, ((Cliente)cmbCliente.getSelectionModel().getSelectedItem()).getClienteId());
-            statement.setInt(3, Integer.parseInt(cmbFactura.getSelectionModel().getSelectedItem().toString()));
+            statement.setInt(3, ((Facturas)cmbFactura.getSelectionModel().getSelectedItem()).getFacturaId());
             statement.execute();
         }catch(SQLException e){
             System.out.println(e.getMessage());
@@ -254,7 +298,7 @@ public class MenuTicketSoporteController implements Initializable{
             statement.setString(2, taDescripcion.getText());
             statement.setString(3,(cmbEstatus.getSelectionModel().getSelectedItem().toString()));
             statement.setInt(4, ((Cliente)cmbCliente.getSelectionModel().getSelectedItem()).getClienteId());
-            statement.setInt(5, Integer.parseInt(cmbFactura.getSelectionModel().getSelectedItem().toString()));
+            statement.setInt(5, ((Facturas)cmbFactura.getSelectionModel().getSelectedItem()).getFacturaId());
             statement.execute();
             
         }catch(SQLException e){

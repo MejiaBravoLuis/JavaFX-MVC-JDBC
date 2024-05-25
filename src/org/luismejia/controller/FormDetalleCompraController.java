@@ -54,7 +54,8 @@ public class FormDetalleCompraController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TODO
+        cmbCompras.setItems(listarCompras());
+        cmbProductos.setItems(listarProductos());
     }    
     
     @FXML
@@ -105,18 +106,18 @@ public class FormDetalleCompraController implements Initializable {
             resultSet = statement.executeQuery();
             
             while(resultSet.next()){
-                int productoId = resultSet.getInt("productoId");
+                int productosId = resultSet.getInt("productosId");
                 String nombreProducto = resultSet.getString("nombreProducto");
                 String descripcionProducto = resultSet.getString("descripcionProducto");
                 int cantidadStock = resultSet.getInt("cantidadStock");
                 double precioVentaUnitario = resultSet.getDouble("precioVentaUnitario");
                 double precioVentaMayor = resultSet.getDouble("precioVentaMayor");
                 double precioCompra = resultSet.getDouble("precioCompra");
-                Blob imagenProducto = resultSet.getBlob("imagenProducto");
+                Blob imagen = resultSet.getBlob("imagen");
                 String distribuidor = resultSet.getString("distribuidor");
                 String categoria = resultSet.getString("categoria");
             
-                productos.add(new Producto(productoId, nombreProducto, descripcionProducto, cantidadStock, precioVentaUnitario, precioVentaMayor,precioCompra,imagenProducto,distribuidor,categoria));
+                productos.add(new Producto(productosId, nombreProducto, descripcionProducto, cantidadStock, precioVentaUnitario, precioVentaMayor,precioCompra,imagen,distribuidor,categoria));
             }
         }catch(SQLException e){
             System.out.println(e.getMessage());
@@ -146,7 +147,7 @@ public class FormDetalleCompraController implements Initializable {
         
         try{
             conexion = Conexion.getInstance().obtenerConexion();
-            String sql = "call sp_listarCompras()";
+            String sql = "call sp_listarCompra()";
             statement = conexion.prepareStatement(sql);
             resultSet = statement.executeQuery();
             

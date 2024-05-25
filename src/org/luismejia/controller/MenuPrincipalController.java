@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 /**
  *
@@ -20,6 +21,8 @@ public class MenuPrincipalController implements Initializable{
     private Main stage;
     @FXML
     MenuItem btnClientes, btnTicketSoporte, btnCargos, btnCategoria, btnDistribuidores, btnEmpleados, btnProductos, btnPromociones, btnCompras, btnFacturas;
+    @FXML
+    Button btnCerrarS;
     
     @FXML
     public void handleButtonAction(ActionEvent event)throws Exception{
@@ -43,6 +46,8 @@ public class MenuPrincipalController implements Initializable{
             stage.menuComprasView();
         }else if(event.getSource() == btnFacturas){
             stage.menuFacturasView();
+        }else if(event.getSource() == btnCerrarS){
+            stage.formInicioView();
         }
     }
     

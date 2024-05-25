@@ -62,7 +62,7 @@ public class FormProductosController implements Initializable {
     ComboBox cmbDistribuidores,cmbCategoriasProductos;
     
     @FXML
-    ImageView imgCargar, imgMostrar;
+    ImageView Cargarimg, Mostrarimg;
     /**
      * Initializes the controller class.
      */
@@ -89,9 +89,9 @@ public class FormProductosController implements Initializable {
             if (producto.getImagenProducto() != null) {
                 InputStream file = producto.getImagenProducto().getBinaryStream();
                 Image image = new Image(file);
-                imgMostrar.setImage(image);
+                Mostrarimg.setImage(image); 
             } else {
-                imgMostrar.setImage(null);
+                Mostrarimg.setImage(null);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -124,8 +124,7 @@ public class FormProductosController implements Initializable {
                         tfPrecioCompra.requestFocus();
                     }
                 }
-                
-               
+
             }else if(op == 2){
                 if(!tfNombreProducto.getText().equals("") && !tfCantidadStock.getText().equals("") && !tfPrecioVentaU.getText().equals("") && !tfPrecioVentaM.getText().equals("") && !tfPrecioCompra.getText().equals("")){
                     if(SuperKinalAlert.getInstance().mostrarAlertaConfirmacion(505).get() == ButtonType.OK){
@@ -161,7 +160,7 @@ public class FormProductosController implements Initializable {
             files = event.getDragboard().getFiles();
             FileInputStream file = new FileInputStream(files.get(0));
             Image image = new Image(file);
-            imgCargar.setImage(image);
+            Cargarimg.setImage(image);
         }catch(Exception e){
             e.printStackTrace();
         }
