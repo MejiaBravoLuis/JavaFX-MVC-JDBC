@@ -100,6 +100,10 @@ public class FormEmpleadosController implements Initializable {
                         tfHoraDeSalida.requestFocus();
                     }
                 }
+            }else if(op == 3){
+                agregarEmpleado();
+                SuperKinalAlert.getInstance().mostrarAlertasInformacion(400);
+                stage.formRegistroView();
             }
         }
     }
@@ -232,12 +236,12 @@ public class FormEmpleadosController implements Initializable {
                 String nombreEmpleado = resultSet.getString("nombreEmpleado");
                 String apellidoEmpleado = resultSet.getString("apellidoEmpleado");
                 double sueldo = resultSet.getDouble("sueldo");
-                Time horDeEntrada = resultSet.getTime("horDeEntrada");
+                Time horaDeEntrada = resultSet.getTime("horaDeEntrada");
                 Time horaDeSalida = resultSet.getTime("horaDeSalida");
                 String cargoId = resultSet.getString("cargo");
                 String encargadoId = resultSet.getString("nombreEncargado");
             
-                empleados.add(new Empleado(empleadoId, nombreEmpleado, apellidoEmpleado, sueldo, horDeEntrada, horaDeSalida,cargoId,encargadoId));
+                empleados.add(new Empleado(empleadoId, nombreEmpleado, apellidoEmpleado, sueldo, horaDeEntrada, horaDeSalida,cargoId,encargadoId));
             }
         }catch(SQLException e){
             System.out.println(e.getMessage());

@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="500.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="org.luismejia.controller.FormInicioController">
+<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.luismejia.controller.FormInicioController">
    <children>
       <ImageView fitHeight="750.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -30,6 +29,7 @@
         </rowConstraints>
          <children>
             <Button fx:id="btnInicioS" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="64.0" prefWidth="106.0" text="Iniciar Sesión" />
+            <Button fx:id="btnRegistro" disable="true" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="64.0" prefWidth="106.0" text="Registrarse" GridPane.columnIndex="1" />
          </children>
       </GridPane>
    </children>

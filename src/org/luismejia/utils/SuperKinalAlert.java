@@ -42,8 +42,20 @@ public class SuperKinalAlert {
         }else if(code == 600){// Código 600 sirve para alerta de campos pendientes.
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Campos Pendientes");
-            alert.setHeaderText("Campos Pendientes");
+            alert.setHeaderText("Faltan algunos campos que neceistan ser llenados");
             alert.setContentText("Algunos campos necesarios para el registro están vacios");
+            alert.showAndWait();
+        }else if(code == 602){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Usuario Incorrecto brotastic");
+            alert.setHeaderText("El usuario que intentas ingresar parece que no existe");
+            alert.setContentText("Verifique que su usuario sea correcto e intente nuevamente");
+            alert.showAndWait();
+        }else if(code == 701){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Contraseña Incorrecta bro");
+            alert.setHeaderText("La contraseña que ingresaste es incorrecta");
+            alert.setContentText("Verifique que la contraseña");
             alert.showAndWait();
         }
     }
@@ -65,8 +77,23 @@ public class SuperKinalAlert {
         }
         
         return action;
-        
-        
+
+    }
+    
+    public void alertaSaludo(String usuario){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("¡Nuevo inicio de sesión!");
+        alert.setHeaderText("Bienvenido de vuelta " + usuario);
+        alert.setContentText("¿Como te va ?, ¿suerte en tu día!");
+        alert.showAndWait();
+    }
+    
+    public void alertaDespedida(String usuario){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Cerrar sesión");
+        alert.setHeaderText("Cerrando sesión para: " + usuario);
+        alert.setContentText("¡Nos vemos!");
+        alert.show();
     }
     
 }

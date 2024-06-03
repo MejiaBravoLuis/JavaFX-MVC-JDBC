@@ -704,3 +704,18 @@ BEGIN
 END$$
 DELIMITER ;
 call sp_buscarDetalleFactura(4);
+
+-- //////////////////////////////////////////////////////////////////////Procedimientos para Usuarios///////////////////////////////////////////////////////
+
+
+DELIMITER $$
+create procedure sp_agregarUsuario(us varchar(40), con varchar(100), nivAccId int, empId int)
+begin
+	insert into Usuarios(usuario, contrasenia, nivelAccesoId, empleadoId) values
+		(us, con, nivAccId, empId);
+end $$
+DELIMITER ;
+
+call sp_agregarUsuario('deSanta', '1234', 1, 1);
+
+select * from Empleados;

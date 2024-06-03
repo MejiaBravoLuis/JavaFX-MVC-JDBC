@@ -13,17 +13,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import org.luismejia.model.Usuario;
+import org.luismejia.utils.SuperKinalAlert;
 /**
  *
  * @author Luis Mejia
  */
 public class MenuPrincipalController implements Initializable{
     private Main stage;
+    
     @FXML
     MenuItem btnClientes, btnTicketSoporte, btnCargos, btnCategoria, btnDistribuidores, btnEmpleados, btnProductos, btnPromociones, btnCompras, btnFacturas;
     @FXML
     Button btnCerrarS;
-    
+
     @FXML
     public void handleButtonAction(ActionEvent event)throws Exception{
         if(event.getSource() == btnClientes){
@@ -47,9 +50,11 @@ public class MenuPrincipalController implements Initializable{
         }else if(event.getSource() == btnFacturas){
             stage.menuFacturasView();
         }else if(event.getSource() == btnCerrarS){
+            
             stage.formInicioView();
         }
     }
+    
     
 
     public Main getStage() {

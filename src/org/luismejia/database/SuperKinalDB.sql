@@ -125,7 +125,31 @@ create table DetalleFactura(
         constraint FK_FacturaId_DetalleFactura foreign key DetalleFactura (facturaId) references Facturas(facturaId),
         constraint FK_ProductoId_DetalleFactura foreign key DetalleFactura (productoId) references Productos(productosId)
 );
- 
+
+
+-- NivelesAcceso: contiene los roles de los usuario
+create table NivelesAcceso(
+	nivelAccesoId int not null auto_Increment,
+    nivelAcceso varchar(40),
+    primary key PK_nivelAccesoid(nivelAccesoId)
+);
+
+-- Usuarios: Almacenar los usuarios del programa(usuario, contraseña, nivelAcceso)
+create table Usuarios(
+	usuarioId int not null auto_increment,
+    usuario varchar(30) not null,
+    contrasenia varchar(100) not null,
+	nivelAccesoId int not null,
+    empleadoId int not null,
+    primary key PK_usuarioId(usuarioId),
+    constraint FK_Usuarios_NivelesAcceso foreign key Usuarios(nivelAccesoId)
+		references NivelesAcceso(nivelAccesoId),
+	constraint FK_Usuarios_Empleados foreign key Usuarios(empleadoId)
+		references Empleados(empleadoId)
+);
+
+
+
 INSERT INTO Clientes ( nombre, apellido, telefono, direccion,nit) values
  
 	('Pablo', 'Blas', '4321-1234', 'Pueblo Paleta','487564-0'),
@@ -138,3 +162,9 @@ INSERT INTO Clientes ( nombre, apellido, telefono, direccion,nit) values
 INSERT INTO Cargo( nombreCargo, descripcionCargo)VALUES
 ('Desarrollador', 'Servicio tecnico');
 
+INSERT INTO NivelesAcceso (nivelAcceso) VALUES 
+	('Admin'), 
+	('Usuario');
+
+    
+    
