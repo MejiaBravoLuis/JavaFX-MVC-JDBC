@@ -26,6 +26,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.luismejia.dao.Conexion;
 import org.luismejia.model.Cliente;
 import org.luismejia.dto.ClienteDTO;
+import org.luismejia.report.GenerarReporte;
 import org.luismejia.system.Main;
 import org.luismejia.utils.SuperKinalAlert;
 
@@ -48,7 +49,7 @@ public class MenuClienteController implements Initializable {
     TableColumn colClienteId,colNombre,colApellido,colTelefono,colDireccion,colNit;
     
     @FXML
-    Button btnAtras,btnAgregar,btnEditar,btnEliminar, btnBuscar;
+    Button btnAtras,btnAgregar,btnEditar,btnEliminar, btnBuscar, btnClienteReport;
     @FXML
     TextField tfClienteId;
     
@@ -77,6 +78,8 @@ public class MenuClienteController implements Initializable {
                 cargaDatos();
             }
             
+        }else if(event.getSource() == btnClienteReport){
+            GenerarReporte.getInstance().generarClientes();
         }
     
     }

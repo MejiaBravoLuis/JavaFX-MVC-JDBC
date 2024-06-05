@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Factura" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5743dcaf-6775-4157-815f-a2c006c30f2d">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DBSuperKinalIN5CM"/>
@@ -91,10 +91,6 @@ where Facturas.facturaId = $P{factId}]]>
 	</background>
 	<title>
 		<band height="255" splitType="Stretch">
-			<image>
-				<reportElement x="-11" y="-20" width="180" height="191" uuid="537605ff-f80f-451f-9c32-10de419b365b"/>
-				<imageExpression><![CDATA["C:/Users/Luis Mejia/Documents/NetBeansProjects/superKinal/src/org/luismejia/image/LogoFactura.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="160" y="79" width="250" height="111" uuid="cbc1fed4-2bdc-45b7-ae32-b5846f4e939d"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">

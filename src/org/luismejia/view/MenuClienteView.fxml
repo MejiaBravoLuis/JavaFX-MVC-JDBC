@@ -76,5 +76,10 @@
             </ImageView>
          </graphic></Button>
       <TextField fx:id="tfClienteId" layoutX="594.0" layoutY="91.0" prefHeight="40.0" prefWidth="261.0" promptText="ingrese el ID del cliente a buscar" />
+      <Button fx:id="btnClienteReport" layoutX="279.0" layoutY="91.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #734A46; -fx-border-radius: 50;" text="Ver reporte de clientes" textFill="WHITE">
+         <font>
+            <Font name="Arial Narrow" size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -109,9 +109,9 @@ public class MenuFacturasController implements Initializable {
         }else if(event.getSource() == btnAgregarDetalle){
             stage.formDetalleFacturaView(1);
         }else if(event.getSource() == btnFinalizarFactura){
-            GenerarReporte.getInstance().generarFactura(((Facturas)tblFacturas.getSelectionModel().getSelectedItem()).getFacturaId());
-        }else if(event.getSource() == btnVerFactura){
             
+        }else if(event.getSource() == btnVerFactura){
+            GenerarReporte.getInstance().generarFactura(((Facturas)tblFacturas.getSelectionModel().getSelectedItem()).getFacturaId());
         }
     }
     

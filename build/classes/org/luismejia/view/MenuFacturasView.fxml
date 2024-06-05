@@ -83,12 +83,12 @@
             <TableColumn fx:id="colTotal" prefWidth="120.7999267578125" text="Total" />
         </columns>
       </TableView>
-      <Button fx:id="btnVerFactura" layoutX="414.0" layoutY="121.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="40.0" prefWidth="189.0" style="-fx-background-color: #734A46;" text="Finalizar Factura de" textFill="WHITE">
+      <Button fx:id="btnFinalizarFactura" layoutX="414.0" layoutY="121.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="40.0" prefWidth="189.0" style="-fx-background-color: #734A46;" text="Finalizar Factura de" textFill="WHITE">
          <font>
             <Font name="Arial Narrow" size="19.0" />
          </font>
       </Button>
-      <Button fx:id="btnFinalizarFactura" layoutX="215.0" layoutY="121.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="40.0" prefWidth="189.0" style="-fx-background-color: #734A46;" text="Ver Factura de" textFill="WHITE">
+      <Button fx:id="btnVerFactura" layoutX="215.0" layoutY="121.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="40.0" prefWidth="189.0" style="-fx-background-color: #734A46;" text="Ver Factura de" textFill="WHITE">
          <font>
             <Font name="Arial Narrow" size="18.0" />
          </font>

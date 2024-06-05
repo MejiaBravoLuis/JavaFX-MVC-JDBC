@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import org.luismejia.model.Usuario;
+import org.luismejia.report.GenerarReporte;
 import org.luismejia.utils.SuperKinalAlert;
 /**
  *
@@ -23,7 +24,7 @@ public class MenuPrincipalController implements Initializable{
     private Main stage;
     
     @FXML
-    MenuItem btnClientes, btnTicketSoporte, btnCargos, btnCategoria, btnDistribuidores, btnEmpleados, btnProductos, btnPromociones, btnCompras, btnFacturas;
+    MenuItem btnClientes, btnTicketSoporte, btnCargos, btnCategoria, btnDistribuidores, btnEmpleados, btnProductos, btnPromociones, btnCompras, btnFacturas, btnClienteReporte, btnProductosReporte;
     @FXML
     Button btnCerrarS;
 
@@ -50,8 +51,11 @@ public class MenuPrincipalController implements Initializable{
         }else if(event.getSource() == btnFacturas){
             stage.menuFacturasView();
         }else if(event.getSource() == btnCerrarS){
-            
             stage.formInicioView();
+        }else if(event.getSource() == btnClienteReporte){
+            GenerarReporte.getInstance().generarClientes();
+        }else if(event.getSource() == btnProductosReporte){
+            GenerarReporte.getInstance().generarProductos();
         }
     }
     
