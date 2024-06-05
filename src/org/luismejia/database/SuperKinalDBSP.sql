@@ -470,10 +470,10 @@ CALL sp_actualizarDetalleCompra(1, 10, 1, 1);
 
 -- Agregar Promoción
 DELIMITER $$
-CREATE PROCEDURE sp_agregarPromocion(precio DECIMAL(10,2), descPromo VARCHAR(100), fechaIni DATE, fechaFin DATE, productoId INT)
+CREATE PROCEDURE sp_agregarPromocion(precio DECIMAL(10,2), descPromo VARCHAR(100), fechaIni DATE, fechaFin DATE, productosId INT)
 BEGIN
     INSERT INTO Promociones(precioPromocion, descripcionPromocion, fechaInicio, fechaFinalizacion, productosId)
-    VALUES(precio, descPromo, fechaIni, fechaFin, productoId);
+    VALUES(precio, descPromo, fechaIni, fechaFin, productosId);
 END$$
 DELIMITER ;
 CALL sp_agregarPromocion(0000.00, 'Que los generos sean para la música', '2024-05-12', '2025-05-12', 1);
@@ -660,7 +660,7 @@ call sp_buscarFactura(1);
 DELIMITER $$
 CREATE PROCEDURE sp_agregarDetalleFactura(prodIdFact INT, factIdFact INT)
 BEGIN
-    INSERT INTO detalleFactura(productoId, facturaId)
+    INSERT INTO detalleFactura(productosId, facturaId)
     VALUES (prodIdFact, factIdFact);
 END$$
 DELIMITER ;
@@ -689,7 +689,7 @@ DELIMITER $$
 CREATE PROCEDURE sp_EditarDetalleFactura(IN detFactId INT, IN prodIdFact INT, IN factIdFact INT)
 BEGIN
     UPDATE detalleFactura
-    SET productoId = prodIdFact, facturaId = factIdFact
+    SET productosId = prodIdFact, facturaId = factIdFact
     WHERE detalleFacturaId = detFactId;
 END$$
 DELIMITER ;
@@ -705,17 +705,75 @@ END$$
 DELIMITER ;
 call sp_buscarDetalleFactura(4);
 
+-- ///////////////////////////////////////////////////////////// PROCEDIMIENTOS PARA FACTURAS ///////////////////////////////////////////////////
+Delimiter $$
+create procedure sp_asignarTotalFactura(in factId int, in totalFact decimal (10,2))
+Begin
+	Update facturas
+		set total = totalFact
+			where facturaId =factId; 
+End $$
+Delimiter ;
+
+Delimiter $$
+create procedure sp_modificarStock(in detaFactId int, in stockActual int)
+begin
+	Update productos
+		set cantidadStock = stockActual
+			where productosId = detaFactId;
+end $$
+Delimiter ;
+
+Delimiter $$
+create procedure sp_asignarTotalCompra(in compId int, in totalC decimal (10,2))
+Begin
+	Update compras
+		set totalCompra = totalC
+			where compraId =compId; 
+End $$
+Delimiter ;
+
+Delimiter $$
+create procedure sp_modificarStockCompra(in productId int, in stockActual int)
+begin
+	Update productos
+		set cantidadStock = stockActual
+			where productosId = productId;
+end $$
+Delimiter ;
+
 -- //////////////////////////////////////////////////////////////////////Procedimientos para Usuarios///////////////////////////////////////////////////////
 
-
+-- Agregar Usuarios
 DELIMITER $$
-create procedure sp_agregarUsuario(us varchar(40), con varchar(100), nivAccId int, empId int)
+create procedure sp_agregarUsuario(us varchar(30), con varchar(100), nivAccId int, empId int)
 begin
 	insert into Usuarios(usuario, contrasenia, nivelAccesoId, empleadoId) values
 		(us, con, nivAccId, empId);
 end $$
 DELIMITER ;
-
 call sp_agregarUsuario('deSanta', '1234', 1, 1);
 
-select * from Empleados;
+-- Buscar Usuarios
+
+DELIMITER $$
+create procedure sp_buscarUsuario(us varchar(30))
+begin
+	select * from Usuarios
+		where usuario = us;
+end $$
+DELIMITER ;
+
+select * from nivelesAcceso;
+
+-- ////////////////////////////////////////////////////////////////////// Procedimientos para Niveles de Acceso ///////////////////////////////////////////////////////
+
+
+DELIMITER $$
+create procedure sp_listarNivelAcceso()
+begin
+	select * from nivelesAcceso;
+end $$
+DELIMITER ;
+
+call sp_listarNivelAcceso();

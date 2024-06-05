@@ -28,6 +28,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.luismejia.dao.Conexion;
 import org.luismejia.dto.FacturaDTO;
 import org.luismejia.model.Facturas;
+import org.luismejia.report.GenerarReporte;
 import org.luismejia.system.Main;
 import org.luismejia.utils.SuperKinalAlert;
 
@@ -51,7 +52,7 @@ public class MenuFacturasController implements Initializable {
     TableColumn colFacturaId, colFecha, colHora, colCliente, colEmpleado, colTotal;
     
     @FXML
-    Button btnAtras, btnAgregar, btnEditar, btnEliminar, btnBuscar, btnAgregarDetalle;
+    Button btnAtras, btnAgregar, btnEditar, btnEliminar, btnBuscar, btnAgregarDetalle, btnFinalizarFactura, btnVerFactura;
     
     @FXML
     TextField tfFacturaId;
@@ -107,6 +108,10 @@ public class MenuFacturasController implements Initializable {
             }
         }else if(event.getSource() == btnAgregarDetalle){
             stage.formDetalleFacturaView(1);
+        }else if(event.getSource() == btnFinalizarFactura){
+            GenerarReporte.getInstance().generarFactura(((Facturas)tblFacturas.getSelectionModel().getSelectedItem()).getFacturaId());
+        }else if(event.getSource() == btnVerFactura){
+            
         }
     }
     

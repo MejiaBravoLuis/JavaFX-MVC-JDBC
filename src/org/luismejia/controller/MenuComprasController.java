@@ -69,7 +69,7 @@ public class MenuComprasController implements Initializable {
             tblCompras.setItems(listarCompras()); 
             colCompraId.setCellValueFactory(new PropertyValueFactory<Compra, Integer>("compraId"));
             colFechaCompra.setCellValueFactory(new PropertyValueFactory<Compra, Date>("fechaCompra"));
-            colTotalCompra.setCellValueFactory(new PropertyValueFactory<Compra, Double>("total"));
+            colTotalCompra.setCellValueFactory(new PropertyValueFactory<Compra, Double>("totalCompra"));
         }
     }
     
@@ -140,7 +140,7 @@ public class MenuComprasController implements Initializable {
                 Date fecha = resultSet.getDate("fechaCompra");
                 Double total = resultSet.getDouble("totalCompra");
             
-                compras.add(new Compra(compraId, fecha,total));
+                compras.add(new Compra(compraId, fecha, total));
             }
         }catch(SQLException e){
             System.out.println(e.getMessage());
@@ -204,8 +204,8 @@ public class MenuComprasController implements Initializable {
             if(resultSet.next()){
                 int compraId = resultSet.getInt("compraId");
                 Date fecha = resultSet.getDate("fechaCompra");
-                Double total = resultSet.getDouble("totalCompra");
-                compra = new Compra(compraId, fecha,total);
+                Double total  = resultSet.getDouble("totalCompra");
+                compra = new Compra(compraId, fecha, total);
             }   
         }catch(SQLException e){
             System.out.println(e.getMessage());

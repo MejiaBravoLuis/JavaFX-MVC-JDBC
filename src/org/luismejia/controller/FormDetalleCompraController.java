@@ -136,6 +136,7 @@ public class FormDetalleCompraController implements Initializable {
                 }
             }catch(SQLException e){
                 System.out.println(e.getMessage());
+                e.printStackTrace();
             }
         }
 
@@ -160,6 +161,7 @@ public class FormDetalleCompraController implements Initializable {
             }
         }catch(SQLException e){
             System.out.println(e.getMessage());
+            e.printStackTrace();
         }finally{
             try{
                 if(resultSet != null){
