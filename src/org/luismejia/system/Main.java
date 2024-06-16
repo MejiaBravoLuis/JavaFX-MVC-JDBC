@@ -28,6 +28,7 @@ import org.luismejia.controller.FormInicioController;
 import org.luismejia.controller.FormProductosController;
 import org.luismejia.controller.FormPromocionesController;
 import org.luismejia.controller.FormRegistroController;
+import org.luismejia.controller.GraficaEmpleadosController;
 import org.luismejia.controller.MenuCargoController;
 import org.luismejia.controller.MenuCategoriaProductosController;
 import org.luismejia.controller.MenuClienteController;
@@ -73,6 +74,16 @@ public class Main extends Application {
         resultado = (Initializable) loader.getController();
         
         return resultado;
+    }
+    
+    public void graficaEmpleados(){
+        try{
+            GraficaEmpleadosController graficaEmpleados = (GraficaEmpleadosController)switchScene("GraficaEmpleadosView.fxml", 1200, 750);
+            graficaEmpleados.setStage(this);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
     }
     
     public void formInicioView(){

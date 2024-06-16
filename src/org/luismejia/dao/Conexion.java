@@ -20,7 +20,7 @@ public class Conexion {
     private String password = "admin";
     
     
-    private Conexion(){
+    private Conexion(){ 
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
         }catch(ClassNotFoundException e){

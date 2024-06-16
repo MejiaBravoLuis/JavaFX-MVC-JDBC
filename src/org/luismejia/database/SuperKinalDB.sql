@@ -136,10 +136,10 @@ create table Usuarios(
 );
 
 INSERT INTO Clientes (nombre, apellido, telefono, direccion, nit) VALUES
-    ('Pablo', 'Blas', '4321-1234', 'Pueblo Paleta', '487564-0'),
-    ('Daniel', 'Flakk', '9874-5612', 'Ciudad Ferrica', '84921579-2'),
-    ('Luis', 'Mejia', '1000-2000', 'Elmore', '93475124-0'),
-    ('Bobina', 'Tesla', '1000-2000', 'Elmore', '93475124-0');
+    ('Luiis', 'Mejia', '4321-1234', 'Guatemala', '487564-0'),
+    ('Pedro', 'Bravo', '9874-5612', 'Guatemala', '84921579-2'),
+    ('Andrés ', 'Alvarado', '1000-2000', 'Guatemala', '93475124-0');
+
 
 INSERT INTO Cargo (nombreCargo, descripcionCargo) VALUES
     ('Desarrollador', 'Servicio tecnico');

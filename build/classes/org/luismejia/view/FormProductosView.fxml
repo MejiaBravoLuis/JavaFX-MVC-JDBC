@@ -40,7 +40,7 @@
       <ComboBox fx:id="cmbDistribuidores" layoutX="493.0" layoutY="541.0" prefWidth="150.0" />
       <ComboBox fx:id="cmbCategoriasProductos" layoutX="879.0" layoutY="206.0" prefHeight="26.0" prefWidth="264.0" />
       <ImageView fx:id="Mostrarimg" fitHeight="354.0" fitWidth="400.0" layoutX="743.0" layoutY="344.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="Cargarimg" fitHeight="162.0" fitWidth="163.0" layoutX="493.0" layoutY="192.0" onDragDropped="#handleOnDrop" onDragOver="#handleOnDrag">
+      <ImageView fx:id="Cargarimg" fitHeight="173.0" fitWidth="197.0" layoutX="470.0" layoutY="191.0" onDragDropped="#handleOnDrop" onDragOver="#handleOnDrag">
          <image>
             <Image url="@../image/DragAndDrop.png" />
          </image>

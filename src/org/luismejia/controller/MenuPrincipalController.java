@@ -24,7 +24,7 @@ public class MenuPrincipalController implements Initializable{
     private Main stage;
     
     @FXML
-    MenuItem btnClientes, btnTicketSoporte, btnCargos, btnCategoria, btnDistribuidores, btnEmpleados, btnProductos, btnPromociones, btnCompras, btnFacturas, btnClienteReporte, btnProductosReporte;
+    MenuItem btnClientes, btnTicketSoporte, btnCargos, btnCategoria, btnDistribuidores, btnEmpleados, btnProductos, btnPromociones, btnCompras, btnFacturas, btnClienteReporte, btnProductosReporte, btnGrafica;
     @FXML
     Button btnCerrarS;
 
@@ -56,6 +56,8 @@ public class MenuPrincipalController implements Initializable{
             GenerarReporte.getInstance().generarClientes();
         }else if(event.getSource() == btnProductosReporte){
             GenerarReporte.getInstance().generarProductos();
+        }else if(event.getSource() == btnGrafica){
+            stage.graficaEmpleados();
         }
     }
     

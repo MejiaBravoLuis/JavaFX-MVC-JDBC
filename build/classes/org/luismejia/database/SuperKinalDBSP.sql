@@ -44,7 +44,7 @@ BEGIN
 		set nombre = nom, apellido = ape, telefono = tel, direccion = dir, nit = ni where clienteId = clidId;
 END $$
 DELIMITER ;
-call sp_actualizarCliente(1,'Andres','Alvarado','2222-3333','Ciudad ferrica','8746521-0');
+call sp_actualizarCliente(1,'Cole','Vargas','2222-3333','Cdad de Guatemala','8746521-0');
 -- Buscar
  
 DELIMITER $$
@@ -70,7 +70,8 @@ BEGIN
     VALUES (nom, ape, sueldo, horaDeEntrada, horaDeSalida, cargoId);
 END$$
 DELIMITER ;
-CALL sp_agregarEmpleado('Michael', 'De santa', 3000.00, '07:00:00', '16:00:00', 1 );
+CALL sp_agregarEmpleado('Luis ', 'Mejia', 9800.00, '07:00:00', '16:00:00', 1  );
+CALL sp_agregarEmpleado('Pedro ', 'Bravo', 9800.00, '07:00:00', '16:00:00', 1 );
 
 -- Listar Empleados
 DELIMITER $$
@@ -249,7 +250,7 @@ BEGIN
     VALUES(nom, descCateg);
 END$$
 DELIMITER ;
-call sp_agregarCategoriasProducto('Limpieza e higiene','cepillo de dientes');
+call sp_agregarCategoriasProducto('Albúm de música','Rancho Humilde');
 
 
 -- Listar Categorías de Producto
@@ -280,7 +281,7 @@ BEGIN
     WHERE categoriaProductosId = categoriaPId;
 END$$
 DELIMITER ;
-call sp_editarCategoriaProducto(1, 'Albúm ', 'Un disco lleno de palos');
+call sp_editarCategoriaProducto(1, 'Tecnología ', 'Productos de informática');
 
 -- Buscar Categoría de Producto
 DELIMITER $$
@@ -333,7 +334,7 @@ BEGIN
     WHERE distribuidorId = distId;
 END$$
 DELIMITER ;
-call sp_editarDistribuidor(1, 'Rain','Trueno','000000','12344321','MeJodí.tainy.com');
+call sp_editarDistribuidor(1, 'Lenovo Computers','USA','126420-4','42119921','Lenovo.com');
 
 -- Buscar Distribuidor 
 DELIMITER $$
@@ -348,13 +349,13 @@ call sp_buscarDistribuidor(1);
 
 --  Agregar Producto
 DELIMITER $$
-CREATE PROCEDURE sp_agregarProducto( nom VARCHAR(50), descProd VARCHAR(100), cant INT, precioUV DECIMAL(10,2), precioMV DECIMAL(10,2), precioC DECIMAL(10,2), img BLOB, distId INT, catId INT)
+CREATE PROCEDURE sp_agregarProducto( nom VARCHAR(50), descProd VARCHAR(100), cant INT, precioUV DECIMAL(10,2), precioMV DECIMAL(10,2), precioC DECIMAL(10,2), img longblob, distId INT, catId INT)
 BEGIN
     INSERT INTO Productos(nombreProducto, descripcionProducto, cantidadStock, precioVentaUnitario, precioVentaMayor, precioCompra, imagen, distribuidorId, categoriaProductosId)
     VALUES(nom, descProd, cant, precioUV, precioMV, precioC, img, distId, catId);
 END$$
 DELIMITER ;
-CALL sp_agregarProducto('Albúm 1', 'Palo palo palo ', 50, 100, 200, 300, NULL, 1, 1);
+CALL sp_agregarProducto('Fatal Fantassy', 'Alvaro Díaz', 100, 4500, 4300, 5000, NULL, 1, 1);
 
 --  Listar Productos
 DELIMITER $$
@@ -381,14 +382,14 @@ call sp_eliminarProducto(2);
 
 -- Editar Producto
 DELIMITER $$
-CREATE PROCEDURE sp_editarProducto(IN prodId INT, nom VARCHAR(50), descProd VARCHAR(100), cant INT, precioUV DECIMAL(10,2), precioMV DECIMAL(10,2), precioC DECIMAL(10,2), img BLOB, distribuidorId INT, categoriaProductosId INT)
+CREATE PROCEDURE sp_editarProducto(IN prodId INT, nom VARCHAR(50), descProd VARCHAR(100), cant INT, precioUV DECIMAL(10,2), precioMV DECIMAL(10,2), precioC DECIMAL(10,2), img longblob, distribuidorId INT, categoriaProductosId INT)
 BEGIN
     UPDATE Productos
     SET nombreProducto = nom, descripcionProducto = descProd, cantidadStock = cant, precioVentaUnitario = precioUV, precioVentaMayor = precioMV, precioCompra = precioC, imagen = img, distribuidorId = distribuidorId, categoriaProductosId = categoriaProductosId
     WHERE productosId = prodId;
 END$$
 DELIMITER ;
-CALL sp_editarProducto(1, 'Fatal Fantassy', 'By Alvarito Diaz', 200, 300, 400, 500, NULL, 1,1 );
+CALL sp_editarProducto(1, 'Laptop Lenovo', 'Laptop gamer', 100, 4500, 4300, 5000, NULL, 1, 1);
 
 -- Buscar Producto
 DELIMITER $$
@@ -515,7 +516,7 @@ BEGIN
     WHERE promocionesId = promId;
 END$$
 DELIMITER ;
-CALL sp_actualizarPromocion(1, 1000, 'Miller´s Prom', '202-05-01', '2024-05-31', 1);
+CALL sp_actualizarPromocion(1, 1000, 'Black Friday', '2024-05-01', '2024-05-31', 1);
 
 
 -- Buscar Promoción

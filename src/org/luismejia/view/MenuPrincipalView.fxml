@@ -41,6 +41,11 @@
               <MenuItem mnemonicParsing="false" text="Acerca de" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Gráfica">
+               <items>
+                  <MenuItem fx:id="btnGrafica" mnemonicParsing="false" onAction="#handleButtonAction" text="Empleados" />
+               </items>
+            </Menu>
         </menus>
       </MenuBar>
       <Button fx:id="btnCerrarS" layoutX="59.0" layoutY="67.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="43.0" prefWidth="115.0" text="Cerrar sesión" />
